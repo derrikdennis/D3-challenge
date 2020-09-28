@@ -1,10 +1,13 @@
+/* Setting the characteristics for the axis titles */
 .aText {
   font-family: sans-serif;
   font-size: 16px;
   text-anchor: middle;
   font-weight: bold;
+  color: #89bdd3
 }
 
+/* for future use */
 .active {
   font-weight: bold;
   fill: #000;
@@ -12,6 +15,7 @@
   text-anchor: middle;
 }
 
+/* for future use */
 .inactive {
   font-weight: lighter;
   fill: #c9c9c9;
@@ -19,12 +23,13 @@
   text-anchor: middle;
 }
 
+/* for future use* /
 .inactive:hover {
   fill: #000;
   cursor: pointer;
 }
 
-/* font size dependent on radius, see app.js */
+/* This sets the labels for the text within the bubbles */
 .stateText {
   font-family: sans-serif;
   fill: #fff;
@@ -32,31 +37,24 @@
   font-size: 10;
 }
 
+/* Sets up the color scheme for the bubbles */
 .stateCircle {
   fill: #89bdd3;
   stroke: #e3e3e3;
 }
 
+/* Give the axis the width that they need */
 .axis {
   stroke-width: 3px;
 }
 
+/* Displaying the chart and giving margins */
 .chart {
   display: block;
   margin: 0;
 }
 
-.d3-tip {
-  padding: 6px;
-  font-size: 12px;
-  line-height: 1;
-  line-height: 1.5em;
-  color: #fff;
-  text-align: center;
-  text-transform: capitalize;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 4px;
-}
+
 
 /* Mobile Rules */
 @media screen and (max-width: 530px) {
