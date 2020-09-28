@@ -100,6 +100,7 @@ d3.csv("./assets/data/data.csv").then(function (statedata) {
     .attr("x", function (d) {
       return xScale(d.poverty);
     })
+    //In order to get the label in the correct position, I had to change it so that it was a hard code of adding four pixels.
     .attr("y", function (d) {
       return yScale(d.smokes) + 4;
     })
