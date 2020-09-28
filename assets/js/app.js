@@ -49,6 +49,7 @@ d3.csv("./assets/data/data.csv").then(function (statedata) {
   });
 
   //Creating scales so that everything moves with the scale both on the x and y axis
+  //Creating a scale on the x-axis
   var xScale = d3
     .scaleLinear()
     .domain([
@@ -61,6 +62,7 @@ d3.csv("./assets/data/data.csv").then(function (statedata) {
     ])
     .range([AxisLeft, svgWidth - chartMargin.right]);
 
+  //Creating the scale on the y-axis based off of smoking percentage.
   var yScale = d3
     .scaleLinear()
     .domain([
