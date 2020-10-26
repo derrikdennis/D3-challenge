@@ -133,6 +133,48 @@ yText
   .attr("class", "aText inactive y")
   .text("Lacks Healthcare (%)");
 
+// Import our .csv file
+
+d3.csv("./assets/data/data.csv").then(function (data) {
+  visualize(data);
+});
+
+//Adding in the visualization function
+
+function visualize(theData) {
+  // Part 1: Essential Local Variables and Functions
+  var curX = "poverty";
+  var curY = "obesity";
+
+  //We also save empty variables for our man and max values of x and y which will allow us to alter the values in functions
+  var xMin;
+  var xMax;
+  var yMin;
+  var yMax;
+
+  //Now to set up tooltip rules
+  var toolTip = d3
+    .tip()
+    .attr("class", "d3-tip")
+    .offset([40, -60])
+    .html(function (d) {
+      var theX;
+      var theState = "<div>" + d.state + "</div>";
+      var theY = "<div>" + curY + ": " + d[curY] + "%</div>";
+      if (curX === "poverty") {
+        theX = "<div>" + curX + ": " + "%</div>";
+      } else {
+        theX =
+          "<div>" +
+          curX +
+          ": " +
+          parseFloat(d[curX]).toLocaleString("en") +
+          "</div>";
+      }
+      return theState + theX + theY;
+    });
+}
+
 //Bringing in the state by state data
 d3.csv("./assets/data/data.csv").then(function (statedata) {
   statedata.forEach(function (data) {
