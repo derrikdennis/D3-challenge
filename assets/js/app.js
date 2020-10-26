@@ -219,6 +219,125 @@ function visualize(theData) {
     // Switch the text just clicked to active.
     clickedText.classed("inactive", false).classed("active", true);
   }
+
+  // Part 3: Instantiate the Scatter Plot
+  // ====================================
+  // This will add the first placement of our data and axes to the scatter plot.
+
+  // First grab the min and max values of x and y.
+  xMinMax();
+  yMinMax();
+
+  // With the min and max values now defined, we can create our scales.
+  // Notice in the range method how we include the margin and word area.
+  // This tells d3 to place our circles in an area starting after the margin and word area.
+  var xScale = d3
+    .scaleLinear()
+    .domain([xMin, xMax])
+    .range([margin + labelArea, width - margin]);
+  var yScale = d3
+    .scaleLinear()
+    .domain([yMin, yMax])
+    // Height is inverses due to how d3 calc's y-axis placement
+    .range([height - margin - labelArea, margin]);
+
+  // We pass the scales into the axis methods to create the axes.
+  // Note: D3 4.0 made this a lot less cumbersome then before. Kudos to mbostock.
+  var xAxis = d3.axisBottom(xScale);
+  var yAxis = d3.axisLeft(yScale);
+
+  // Determine x and y tick counts.
+  // Note: Saved as a function for easy mobile updates.
+  function tickCount() {
+    if (width <= 500) {
+      xAxis.ticks(5);
+      yAxis.ticks(5);
+    } else {
+      xAxis.ticks(10);
+      yAxis.ticks(10);
+    }
+  }
+  tickCount();
+
+  // We append the axes in group elements. By calling them, we include
+  // all of the numbers, borders and ticks.
+  // The transform attribute specifies where to place the axes.
+  svg
+    .append("g")
+    .call(xAxis)
+    .attr("class", "xAxis")
+    .attr("transform", "translate(0," + (height - margin - labelArea) + ")");
+  svg
+    .append("g")
+    .call(yAxis)
+    .attr("class", "yAxis")
+    .attr("transform", "translate(" + (margin + labelArea) + ", 0)");
+
+  // Now let's make a grouping for our dots and their labels.
+  var theCircles = svg.selectAll("g theCircles").data(theData).enter();
+
+  // We append the circles for each row of data (or each state, in this case).
+  theCircles
+    .append("circle")
+    // These attr's specify location, size and class.
+    .attr("cx", function (d) {
+      return xScale(d[curX]);
+    })
+    .attr("cy", function (d) {
+      return yScale(d[curY]);
+    })
+    .attr("r", circRadius)
+    .attr("class", function (d) {
+      return "stateCircle " + d.abbr;
+    })
+    // Hover rules
+    .on("mouseover", function (d) {
+      // Show the tooltip
+      toolTip.show(d, this);
+      // Highlight the state circle's border
+      d3.select(this).style("stroke", "#323232");
+    })
+    .on("mouseout", function (d) {
+      // Remove the tooltip
+      toolTip.hide(d);
+      // Remove highlight
+      d3.select(this).style("stroke", "#e3e3e3");
+    });
+
+  // With the circles on our graph, we need matching labels.
+  // Let's grab the state abbreviations from our data
+  // and place them in the center of our dots.
+  theCircles
+    .append("text")
+    // We return the abbreviation to .text, which makes the text the abbreviation.
+    .text(function (d) {
+      return d.abbr;
+    })
+    // Now place the text using our scale.
+    .attr("dx", function (d) {
+      return xScale(d[curX]);
+    })
+    .attr("dy", function (d) {
+      // When the size of the text is the radius,
+      // adding a third of the radius to the height
+      // pushes it into the middle of the circle.
+      return yScale(d[curY]) + circRadius / 2.5;
+    })
+    .attr("font-size", circRadius)
+    .attr("class", "stateText")
+    // Hover Rules
+    .on("mouseover", function (d) {
+      // Show the tooltip
+      toolTip.show(d);
+      // Highlight the state circle's border
+      d3.select("." + d.abbr).style("stroke", "#323232");
+    })
+    .on("mouseout", function (d) {
+      // Remove tooltip
+      toolTip.hide(d);
+      // Remove highlight
+      d3.select("." + d.abbr).style("stroke", "#e3e3e3");
+    });
 }
 
 //Bringing in the state by state data
