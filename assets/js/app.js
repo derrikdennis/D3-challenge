@@ -39,23 +39,52 @@ function crGet() {
 
 //Bottom axes
 
-svg.append("g")
-  .attr("class","xText");
+svg.append("g").attr("class", "xText");
 var xText = d3.select(".xText");
 
 //We will give xText a transform property that places it at the bottom of the chart.
 //By nesting this attribute in a function, we can easily change the location of the label group whenever the width of the window changes.
 
-function xTextRefresh){
+function xTextRefresh() {
   xText.attr(
     "transform",
-    "translate("+
-      ((width-labelArea) / 2 + labelArea) +
-      ", "+
-      (height-margin-tPadBot) +
+    "translate(" +
+      ((width - labelArea) / 2 + labelArea) +
+      ", " +
+      (height - margin - tPadBot) +
       ")"
   );
 }
+xTextRefresh();
+
+//Now we use xtext to append three text SVG files with y coordinates specified to space out the values
+
+//Poverty
+xText
+  .append("text")
+  .attr("y", -26)
+  .attr("data-name", "poverty")
+  .attr("data-axis", "x")
+  .attr("class", "aText active x")
+  .text("In Poverty(%)");
+
+//Age
+xText
+  .append("text")
+  .attr("y", 0)
+  .attr("data-name", "age")
+  .attr("data-axis", "x")
+  .attr("class", "aText inactive x")
+  .text("Age (Median)");
+
+//Income
+xText
+  .append("text")
+  .attr("y", 26)
+  .attr("data-name", "income")
+  .attr("data-axis", "x")
+  .attr("class", "aText inactive x")
+  .text("Household Income (Median)");
 
 //Bringing in the state by state data
 d3.csv("./assets/data/data.csv").then(function (statedata) {
