@@ -173,6 +173,52 @@ function visualize(theData) {
       }
       return theState + theX + theY;
     });
+  //Call the tooltip function
+  svg.call(toolTip);
+
+  // PART 2: D.R.Y!
+  // ==============
+  // These functions remove some repitition from later code.
+  // This will be more obvious in parts 3 and 4.
+
+  // a. change the min and max for x
+  function xMinMax() {
+    // min will grab the smallest datum from the selected column.
+    xMin = d3.min(theData, function (d) {
+      return parseFloat(d[curX]) * 0.9;
+    });
+
+    // .max will grab the largest datum from the selected column.
+    xMax = d3.max(theData, function (d) {
+      return parseFloat(d[curX]) * 1.1;
+    });
+  }
+
+  // b. change the min and max for y
+  function yMinMax() {
+    // min will grab the smallest datum from the selected column.
+    yMin = d3.min(theData, function (d) {
+      return parseFloat(d[curY]) * 0.9;
+    });
+
+    // .max will grab the largest datum from the selected column.
+    yMax = d3.max(theData, function (d) {
+      return parseFloat(d[curY]) * 1.1;
+    });
+  }
+
+  // c. change the classes (and appearance) of label text when clicked.
+  function labelChange(axis, clickedText) {
+    // Switch the currently active to inactive.
+    d3.selectAll(".aText")
+      .filter("." + axis)
+      .filter(".active")
+      .classed("active", false)
+      .classed("inactive", true);
+
+    // Switch the text just clicked to active.
+    clickedText.classed("inactive", false).classed("active", true);
+  }
 }
 
 //Bringing in the state by state data
