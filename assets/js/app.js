@@ -86,6 +86,25 @@ xText
   .attr("class", "aText inactive x")
   .text("Household Income (Median)");
 
+//Left Axis
+var leftTextX = margin + tPadLeft;
+var leftTextY = (height + labelArea) / 2 - labelArea;
+
+//We add a second label group, this time for the axis left of the chart
+svg.append("g").attr("class", "yText");
+
+// yText will allow us to select the group without excess code
+var yText = d3.select(".yText");
+
+// Like before, we nest the group's transform attr in a function to make changing it on a window change an easy operation
+function yTextRefresh() {
+  yText.attr(
+    "transform",
+    "translate(" + leftTextX + ", " + leftTextY + ")rotate(-90)"
+  );
+}
+yTextRefresh();
+
 //Bringing in the state by state data
 d3.csv("./assets/data/data.csv").then(function (statedata) {
   statedata.forEach(function (data) {
