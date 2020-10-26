@@ -105,6 +105,34 @@ function yTextRefresh() {
 }
 yTextRefresh();
 
+//Now we append the text
+// Obesity
+yText
+  .append("text")
+  .attr("y", -26)
+  .attr("data-name", "obesity")
+  .attr("data-axis", "y")
+  .attr("class", "aText active y")
+  .text("Obese (%)");
+
+// 2. Smokes
+yText
+  .append("text")
+  .attr("x", 0)
+  .attr("data-name", "smokes")
+  .attr("data-axis", "y")
+  .attr("class", "aText inactive y")
+  .text("Smokes (%)");
+
+// 3. Lacks Healthcare
+yText
+  .append("text")
+  .attr("y", 26)
+  .attr("data-name", "healthcare")
+  .attr("data-axis", "y")
+  .attr("class", "aText inactive y")
+  .text("Lacks Healthcare (%)");
+
 //Bringing in the state by state data
 d3.csv("./assets/data/data.csv").then(function (statedata) {
   statedata.forEach(function (data) {
