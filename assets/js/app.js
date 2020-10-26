@@ -7,10 +7,10 @@ var padding = 20;
 var chartMargin = 30;
 
 //space for placing words
-var labelarea = 110;
+var labelArea = 110;
 
 //This will help with the left axis
-var AxisLeft = chartMargin.left + 20;
+var axisLeft = chartMargin.left + 20;
 
 //Padding for the text at the bottom and left axes
 var tPadBot = 40;
@@ -33,6 +33,28 @@ function crGet() {
   } else {
     cirRadius = 10;
   }
+}
+
+//Creating Labels for our Axes
+
+//Bottom axes
+
+svg.append("g")
+  .attr("class","xText");
+var xText = d3.select(".xText");
+
+//We will give xText a transform property that places it at the bottom of the chart.
+//By nesting this attribute in a function, we can easily change the location of the label group whenever the width of the window changes.
+
+function xTextRefresh){
+  xText.attr(
+    "transform",
+    "translate("+
+      ((width-labelArea) / 2 + labelArea) +
+      ", "+
+      (height-margin-tPadBot) +
+      ")"
+  );
 }
 
 //Bringing in the state by state data
