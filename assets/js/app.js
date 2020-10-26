@@ -4,12 +4,10 @@ var svgHeight = 660;
 var padding = 20;
 
 //Create Chart Margins to help axes and placement of chart
-var chartMargin = {
-  top: 30,
-  right: 30,
-  bottom: 30,
-  left: 30,
-};
+var chartMargin = 30;
+
+//space for placing words
+var labelarea = 110;
 
 //This will help with the left axis
 var AxisLeft = chartMargin.left + 20;
@@ -23,7 +21,19 @@ var svg = d3
   .select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
-  .attr("height", svgHeight);
+  .attr("height", svgHeight)
+  .attr("class", "chart");
+
+//Set the radous for each dot thjat will appear in the graph
+//Note: Making this a function allows us to easily call it in the mobility section of our code
+var circRadoius;
+function crGet() {
+  if (svgWidth <= 530) {
+    circRadius = 5;
+  } else {
+    cirRadius = 10;
+  }
+}
 
 //Bringing in the state by state data
 d3.csv("./assets/data/data.csv").then(function (statedata) {
