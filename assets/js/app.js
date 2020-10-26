@@ -1,6 +1,6 @@
 // Create svg Area for Chart
-var svgWidth = 960;
-var svgHeight = 660;
+var width = parseInt(d3.select("#scatter").style("width"));
+var height = width - width / 3.9;
 var padding = 20;
 
 //Create Chart Margins to help axes and placement of chart
@@ -12,16 +12,16 @@ var labelarea = 110;
 //This will help with the left axis
 var AxisLeft = chartMargin.left + 20;
 
-//This will finalize the area that is going to be used within the svg area of the chart
-var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
-var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+//Padding for the text at the bottom and left axes
+var tPadBot = 40;
+var tPadLeft = 40;
 
 //Creating the svg which will be a scatterplot
 var svg = d3
   .select("#scatter")
   .append("svg")
-  .attr("width", svgWidth)
-  .attr("height", svgHeight)
+  .attr("width", width)
+  .attr("height", height)
   .attr("class", "chart");
 
 //Set the radous for each dot thjat will appear in the graph
