@@ -1,4 +1,8 @@
-# D3 Homework - Data Journalism and D3
+# Data Journalism and D3 <!-- omit in toc -->
+
+- [Background](#background)
+- [Your Task](#your-task)
+- [Findings](#findings)
 
 ## Background
 
@@ -10,7 +14,6 @@ The data set included with the assignment is based on 2014 ACS 1-year estimates:
 
 ## Your Task
 
-### Core Assignment: D3 Dabbler (Required Assignment)
 
 I chose `Smokers vs. Poverty`.
 
@@ -22,18 +25,6 @@ Using the D3 techniques we taught you in class, create a scatter plot that repre
 
 - Note: You'll need to use `python -m http.server` to run the visualization. This will host the page at `localhost:8000` in your web browser.
 
-### Assessment
+## Findings
 
-Your final product will be assessed on the following metrics:
-
-- Creation of a **new** repository on GitHub called `D3-Challenge` (note the kebab-case). Do not add to an already existing repo.
-
-- Completion of all steps in the core assignment
-
-- Coherency of scatter plot (labels, ticks)
-
-- Visual attraction
-
-- Professionalism
-
----
+Please refer to the corresponding webpage for results at [derrikdennis.github.io/D3-challenge](https://derrikdennis.github.io/D3-challenge)
