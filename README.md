@@ -1,5 +1,6 @@
-# Data Journalism and D3 <!-- omit in toc -->
+# Data Journalism and D3 - D3 Challenge <!-- omit in toc -->
 
+## Table of Contents <!-- omit in toc -->
 - [Background](#background)
 - [Instructions](#instructions)
 - [Findings](#findings)
